@@ -1,0 +1,341 @@
+// ============================================================================
+// Variables
+// ============================================================================
+
+// Couleurs de base
+
+@black: #000;
+@blue: #00f;
+@white: #fff;
+@red: #f00;
+@yellow: #ffc000;
+
+// Fontes
+
+// 16px (la taille par défaut d'une fonte) * .625 = 10px
+@font_size: percentage(.625);
+@font_size_medium: 2.8em; // 28px
+@font_size_large: 3.6em; // 36px
+
+// Couleurs
+
+@text_color: @black;
+@current_link_color: @red;
+@error_color: @red;
+
+// Dimensions
+
+@grid_inter_width: 20px;
+@grid_1_width: 220px;
+@grid_2_width: (2 * @grid_1_width + @grid_inter_width);
+@grid_3_width: (3 * @grid_1_width + 2 * @grid_inter_width);
+@grid_4_width: (4 * @grid_1_width + 3 * @grid_inter_width);
+
+// Z-Index
+
+@overlay_zindex: 100;
+
+// Echelles
+
+@h1_font_scale: 2.4;
+
+// ============================================================================
+// Règles de base
+// ============================================================================
+
+// H5BP v4.3.0 ----------------------------------------------------------------
+
+AUDIO, CANVAS, IMG, VIDEO {
+    vertical-align: middle;
+}
+
+FIELDSET {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+TEXTAREA {
+    resize: vertical;
+}
+
+// Règles spécifiques au projet ------------------------------------------------
+
+HTML {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: @font_size;
+    line-height: 1.4;
+}
+
+BODY {
+    background-color: @white;
+    color: @black;
+}
+
+UL, OL {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+NAV {
+    UL, OL {
+        A {
+            // Dans un menu, on donne plus d'impact physique aux liens
+            display: inline-block;
+        }
+    }
+}
+
+H1 {
+    .serif();
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+H2 {
+    font-size: 1em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+H3 {
+    font-size: 1em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+A {
+    color: @yellow;
+    text-decoration: none;
+    /*transition: all .2s ease-in-out;*/
+    &:hover, &:focus {
+        color: @blue;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(255, 255, 255, .25);
+    }
+}
+
+// ============================================================================
+// Disposition globale
+// ============================================================================
+
+BODY {
+    // On centre le corps de la page.
+    width: @grid_4_width;
+    margin: 0 auto;
+    font-size: 1.5em;
+}
+
+HEADER {
+    padding-top: 1.9em;
+
+    /*H1 {
+        margin: 0 auto;
+        font-size: 1.8em;
+        font-weight: normal;
+        // text-align: center;
+        text-transform: uppercase;
+
+        EM, STRONG {
+            font-style: normal;
+            font-weight: bold;
+        }
+        // A {
+        //   &:hover {
+        //     color: @black;
+        //   }
+        // }
+    }*/
+
+    LI {
+        margin-right: 1em;
+    }
+}
+
+SECTION {
+    /*clear: both;*/
+    margin-top: 2.3em;
+    margin-bottom: 2em;
+
+    /*H1 {
+        margin: (2.4em / @h1_font_scale) 0 1em 0;
+        font-size: (@h1_font_scale * 1em);
+        text-align: center;
+
+        SPAN {
+            display: block;
+            width: 15px;
+            height: 8px;
+            margin: (.9em / @h1_font_scale) auto (1.9em / @h1_font_scale) auto;
+            //background: data-uri("img/down_arrow.png") no-repeat;
+        }
+    }*/
+}
+
+FOOTER {
+    margin-bottom: 2em;
+    font-size: 1.1em;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    /*border-top: solid 2px @grey;*/
+    /*font-variant: small-caps;*/
+    P {
+        margin: 1.8em 0 0;
+        /*color: @grey;*/
+    }
+}
+
+// ============================================================================
+// Utilitaires
+// ============================================================================
+
+// Fontes ---------------------------------------------------------------------
+
+.serif {
+    font-family: "Droid Serif", Georgia, "Times New Roman", serif;
+}
+
+.serif_medium {
+    font-size: @font_size_medium;
+    line-height: 1.5em;
+}
+
+.serif_large {
+    font-size: @font_size_large;
+    line-height: 1.5em;
+}
+
+.highlight_text {
+    font-size: 2.4em;
+    font-weight: bold;
+    color: @black;
+}
+
+// Listes ---------------------------------------------------------------------
+
+// Liste horizontale
+
+// WARNING: À coupler avec "clearfix".
+// NB: Utiliser "display: inline-block" semblerait plus naturel mais dans ce cas
+// les espaces blancs sont significatifs et, suivant le contenu HTML,
+// on peut avoir des espaces entre les blocs. On peut contourner ce problème en
+// minifiant le HTML (ie </li><li>) ou en supprimant la balise fermante mais,
+// dans les deux cas, la solution est fragile. On préfère donc utiliser
+// "float: left". Il ne faut alors pas oublier de rajouter un clearfix.
+.li_inline {
+    > LI {
+        float: left;
+    }
+}
+
+// Liste centrée
+
+.li_center {
+    text-align: center;
+
+    > LI {
+        display: inline-block;
+    }
+}
+
+.li_inline2center() {
+    .li_inline {
+        .li_center();
+
+        > LI {
+            float: none;
+        }
+    }
+}
+
+// Textes ---------------------------------------------------------------------
+
+.text_center {
+    text-align: center;
+}
+
+.text_right {
+    text-align: right;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.text_underline {
+    text-decoration: underline;
+}
+
+// Paragraphes ----------------------------------------------------------------
+
+.noparsep {
+    margin-bottom: 0;
+}
+
+P + .noparsep {
+    margin-top: 0;
+}
+
+// Blocs ----------------------------------------------------------------------
+
+.float_right {
+    float: right;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_clear {
+    clear: both;
+}
+
+.lbr {
+    display: block;
+}
+
+.nodisplay {
+    display: none;
+}
+
+// Fontes ---------------------------------------------------------------------
+
+.sansserif {
+    font-family: sans-serif;
+}
+
+.raw_text {
+    // WARNING: Les sauts à la ligne deviennent importants !
+    white-space: pre-line;
+}
+
+// ============================================================================
+// Pages
+// ============================================================================
+
+#home {
+    p.bienvenue {
+        font-style: italic;
+    }
+}
+
+.accordeon {
+    display: none;
+}
+
+// ============================================================================
+// Responsive
+// ============================================================================
+
+@import "/style.responsive.less" only screen and (max-width: @grid_4_width);
+
+@min_3_width: (1px + @grid_3_width);
+@import "/style.responsive.3.less" only screen and (min-width: @min_3_width) and (max-width: @grid_4_width);
+
+@min_2_width: (1px + @grid_2_width);
+@import "/style.responsive.2.less" only screen and (min-width: @min_2_width) and (max-width: @grid_3_width);
+
+@import "/style.responsive.1.less" only screen and (max-width: @grid_2_width);
