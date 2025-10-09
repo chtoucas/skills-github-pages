@@ -330,12 +330,12 @@ P + .noparsep {
 // Responsive
 // ============================================================================
 
-@import "/style.responsive.less" only screen and (max-width: @grid_4_width);
+@import "style.responsive.less" only screen and (max-width: @grid_4_width);
 
 @min_3_width: (1px + @grid_3_width);
-@import "/style.responsive.3.less" only screen and (min-width: @min_3_width) and (max-width: @grid_4_width);
+@import "style.responsive.3.less" only screen and (min-width: @min_3_width) and (max-width: @grid_4_width);
 
 @min_2_width: (1px + @grid_2_width);
-@import "/style.responsive.2.less" only screen and (min-width: @min_2_width) and (max-width: @grid_3_width);
+@import "style.responsive.2.less" only screen and (min-width: @min_2_width) and (max-width: @grid_3_width);
 
-@import "/style.responsive.1.less" only screen and (max-width: @grid_2_width);
+@import "style.responsive.1.less" only screen and (max-width: @grid_2_width);
